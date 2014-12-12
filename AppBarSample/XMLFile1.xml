@@ -1,0 +1,35 @@
+﻿  1: <system.serviceModel>
+   2:   <!--UPDATE the ENDPOINT by Changing the binding to webHttpBinding-->
+   3:   <!--POINT to the endpointBehavior Created below by ADDing behaviorConfiguration to the endpoint node-->
+   4:   <services>
+   5:     <service behaviorConfiguration="MyServiceBehavior" name="REST_WCF_Service.Service1">
+   6:       <endpoint address="" binding="webHttpBinding" behaviorConfiguration="web" contract="REST_WCF_Service.IService1">
+   7:         <identity>
+   8:           <dns value="localhost"/>
+   9:         </identity>
+  10:       </endpoint>
+  11:       <endpoint address="max" binding="mexHttpBinding" contract="IMetadataExchange"></endpoint>
+  12:     </service>
+  13:   </services>
+  14:   <behaviors>
+  15:     <!--BEGIN ADD ENDPOINT BEHAVIOR-->
+  16:     <endpointBehaviors>
+  17:       <behavior name ="web">
+  18:         <webHttp />
+  19:       </behavior>
+  20:     </endpointBehaviors>
+  21:     <!--END of ADD ENDPOINT BEHAVIOR-->
+  22:     <serviceBehaviors>
+  23:       <behavior name="MyServiceBehavior"> <!--ADDED MyServiceBehvior-->
+  24:         <!-- To avoid disclosing metadata information, set the values below to false before deployment -->
+  25:         <serviceMetadata httpGetEnabled="true" httpsGetEnabled="true"/>
+  26:         <!-- To receive exception details in faults for debugging purposes, set the value below to true.  Set to false before deployment to avoid disclosing exception information -->
+  27:         <serviceDebug includeExceptionDetailInFaults="false"/>
+  28:       </behavior>
+  29:     </serviceBehaviors>
+  30:   </behaviors>
+  31:   <protocolMapping>
+  32:       <add binding="basicHttpsBinding" scheme="https" />
+  33:   </protocolMapping>    
+  34:   <serviceHostingEnvironment aspNetCompatibilityEnabled="true" multipleSiteBindingsEnabled="true" />
+  35: </system.serviceModel>

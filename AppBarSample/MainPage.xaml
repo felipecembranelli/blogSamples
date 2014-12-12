@@ -1,0 +1,27 @@
+﻿<Page
+    x:Class="AppBarSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppBarSample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Page.BottomAppBar>
+        <CommandBar Visibility="Visible">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="btnMap" Label="Mapa" Icon="Map"  Click="btnMap_Click" Visibility="Visible"/>
+                <AppBarButton x:Name="btnGo" Label="Previsão" Icon="Go" Click="btnGo_Click" Visibility="Visible"/>
+                <AppBarButton x:Name="btnConfig" Label="Configurar" Icon="Setting" Click="btnConfig_Click" Visibility="Visible" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Test01"/>
+                <AppBarButton Label="Test02"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+  
+
+</Page>
