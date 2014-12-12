@@ -1,0 +1,91 @@
+﻿<Page
+    x:Class="LinkedinDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LinkedinDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="404.596">
+
+    <ScrollViewer Height="600" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" AllowDrop="False" BringIntoViewOnFocusChange="True" HorizontalScrollMode="Disabled" IsHoldingEnabled="True" >
+        <Grid Background="#FF56AAF3" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,230" Grid.RowSpan="2" >
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="56" Text="OAuthLinkedIn" Margin="0,0,0,0"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Consumer Key" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+
+                <TextBox x:Name="consumerKey" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="200" Height="25" FontFamily="Segoe UI Semibold"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Consumer Secret Key" VerticalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+                <TextBox x:Name="consumerSecretKey" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="200" Height="25" FontFamily="Segoe UI Semibold"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Request Token (oauth_token)" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+                <TextBox x:Name="requestToken" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="400" FontFamily="Segoe UI Semibold"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Request Token Secret Key (oauth_token_reset)" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+                <TextBox x:Name="requestTokenSecretKey" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="400" FontFamily="Segoe UI Semibold"/>
+
+                <HyperlinkButton x:Name="oAuthAuthorizeLink" HorizontalAlignment="Left" VerticalAlignment="Stretch" Content="Authorize URL" Foreground="Blue"
+                                 Click="oAuthAuthorizeLink_Click_1" FontSize="14"/>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 0 0">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="oauth_verifier" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+                    <TextBox x:Name="oAuthVerifier" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="80" Height="25" FontFamily="Segoe UI Semibold"/>
+                </StackPanel>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Access Token (oauth_token)" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+                <TextBox x:Name="accessToken" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="400" FontFamily="Segoe UI Semibold"/>
+
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Access Token Secret Key (oauth_token_reset)" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
+                <TextBox x:Name="accessTokenSecretKey" HorizontalAlignment="Left" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Center" Width="400" FontFamily="Segoe UI Semibold"/>
+
+                <Button Content="Get Request Token" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Blue" BorderThickness="0" x:Name="getRequestToken" Click="getRequestToken_Click_1"
+        		FontFamily="Segoe UI Semibold" Margin="20,0,0,0" 
+        		Height="40"/>
+                <Button Content="Get Access Token" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Blue" BorderThickness="0" 
+            	FontFamily="Segoe UI Semibold" Margin="20,0,0,0" x:Name="getAccessToken" Click="getAccessToken_Click_1"
+            	Height="40"/>
+
+                <TextBox x:Name="LinkedInResponse" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" IsReadOnly="True" TextWrapping="Wrap"/>
+                <WebView x:Name="WebViewHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+
+                <TextBox x:Name="KeyWords" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" IsReadOnly="False" TextWrapping="Wrap" Margin="0,0,0,0"/>
+
+                <Button  HorizontalAlignment="Left"
+                     Content="Request User Profile" VerticalAlignment="Center"
+                     x:Name="requestUserProfile" Click="requestUserProfile_Click_1"
+                     BorderThickness="0" Background="Blue"
+                     Padding="10" Width="180"/>
+                <Button  HorizontalAlignment="Left"
+                     Content="Request Connections" VerticalAlignment="Center"
+                     x:Name="requestConnections" Click="requestConnections_Click_1"
+                     BorderThickness="0" Background="Blue"
+                     Padding="10" Width="180"/>
+                <Button  HorizontalAlignment="Left"
+                     Content="Request Positions" VerticalAlignment="Center"
+                     x:Name="requestPositions" Click="requestPositions_Click_1"
+                     BorderThickness="0" Background="Blue"
+                     Padding="10" Width="180"/>
+
+                <Button  HorizontalAlignment="Left"
+                     Content="Request Jobs" VerticalAlignment="Center"
+                     x:Name="requestJobs" Click="requestJobs_Click_1"
+                     BorderThickness="0" Background="Blue"
+                     Padding="10" Width="180"/>
+
+                <Button  HorizontalAlignment="Left"
+                     Content="Request Jobs by Keywords" VerticalAlignment="Center"
+                     x:Name="requestJobsByKeyWords" Click="requestJobsByKeyWords_Click"
+                     BorderThickness="0" Background="Blue"
+                     Padding="10" Width="180"/>
+
+
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
