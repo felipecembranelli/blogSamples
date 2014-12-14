@@ -8,15 +8,26 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="404.596">
 
-    <ScrollViewer Height="600" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" AllowDrop="False" BringIntoViewOnFocusChange="True" HorizontalScrollMode="Disabled" IsHoldingEnabled="True" >
-        <Grid Background="#FF56AAF3" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top">
+    <ScrollViewer Height="600" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" VerticalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible"  HorizontalScrollMode="Enabled" IsHoldingEnabled="True" >
+        <Grid Background="#FF56AAF3" HorizontalAlignment="Left" Width="Auto" VerticalAlignment="Top" Margin="10 10 10 10" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,230" Grid.RowSpan="2" >
+            <WebView x:Name="WebViewHost" Grid.Row="0"
+                           Height="500"
+                         Width="300"
+                         Visibility="Visible"  
+                         ScrollViewer.HorizontalScrollMode="Enabled"
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         ScrollViewer.ZoomMode="Enabled" NavigationCompleted="WebViewHost_NavigationCompleted" NavigationStarting="WebViewHost_NavigationStarting"
+                         />
+            <TextBox x:Name="LinkedInResponse" HorizontalAlignment="Stretch" Height="400" VerticalAlignment="Stretch" Visibility="Visible" IsReadOnly="True" TextWrapping="Wrap"/>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,230" Grid.RowSpan="2" >
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="56" Text="OAuthLinkedIn" Margin="0,0,0,0"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Consumer Key" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
 
@@ -50,8 +61,7 @@
             	FontFamily="Segoe UI Semibold" Margin="20,0,0,0" x:Name="getAccessToken" Click="getAccessToken_Click_1"
             	Height="40"/>
 
-                <TextBox x:Name="LinkedInResponse" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" IsReadOnly="True" TextWrapping="Wrap"/>
-                <WebView x:Name="WebViewHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed"/>
+                
 
                 <TextBox x:Name="KeyWords" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" IsReadOnly="False" TextWrapping="Wrap" Margin="0,0,0,0"/>
 

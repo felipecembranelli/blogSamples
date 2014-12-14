@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -36,6 +37,8 @@ namespace LinkedinDemo
         string _requestJobsUrl = "http://api.linkedin.com/v1/people/~/suggestions/job-suggestions";
         string _requestJobsByKeyWordsUrl = "https://api.linkedin.com/v1/job-search?keywords=quality";
 
+        string callback = "https://www.linkedin.com/sucess.htm";
+
         OAuthUtil oAuthUtil = new OAuthUtil();
 
         public MainPage()
@@ -43,6 +46,7 @@ namespace LinkedinDemo
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
         }
 
         /// <summary>
@@ -54,19 +58,59 @@ namespace LinkedinDemo
         {
             consumerKey.Text = _consumerKey;
             consumerSecretKey.Text = _consumerSecretKey;
+
+            LinkedinAuthentication();
+
+             
+        }
+
+        private async  void LinkedinAuthentication()
+        {
+            // Step 1 : Get request token
+            await GetRequestToken();
+
+        
+            //
+        }
+
+        public string UrlEncode(string value)
+        {
+            StringBuilder result = new StringBuilder();
+            string unreservedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
+
+            foreach (char symbol in value)
+            {
+                if (unreservedChars.IndexOf(symbol) != -1)
+                {
+                    result.Append(symbol);
+                }
+                else
+                {
+                    result.Append('%' + String.Format("{0:X2}", (int)symbol));
+                }
+            }
+
+            return result.ToString();
         }
 
         private async void getRequestToken_Click_1(object sender, RoutedEventArgs e)
         {
+            await GetRequestToken();
+        }
+
+        private async System.Threading.Tasks.Task GetRequestToken()
+        {
             string nonce = oAuthUtil.GetNonce();
             string timeStamp = oAuthUtil.GetTimeStamp();
 
-            string sigBaseStringParams = "oauth_consumer_key=" + consumerKey.Text;
-
+            string sigBaseStringParams = "oauth_callback=" + this.UrlEncode(callback);
+            sigBaseStringParams += "&" + "oauth_consumer_key=" + consumerKey.Text;
             sigBaseStringParams += "&" + "oauth_nonce=" + nonce;
             sigBaseStringParams += "&" + "oauth_signature_method=" + "HMAC-SHA1";
             sigBaseStringParams += "&" + "oauth_timestamp=" + timeStamp;
+
             sigBaseStringParams += "&" + "oauth_version=1.0";
+
             string sigBaseString = "POST&";
             sigBaseString += Uri.EscapeDataString(_linkedInRequestTokenUrl) + "&" + Uri.EscapeDataString(sigBaseStringParams);
 
@@ -101,6 +145,10 @@ namespace LinkedinDemo
                 requestToken.Text = oauth_token;
                 requestTokenSecretKey.Text = oauth_token_secret;
                 oAuthAuthorizeLink.Content = Uri.UnescapeDataString(oauth_authorize_url + "?oauth_token=" + oauth_token);
+
+                //// Step 2 : Call linkedin web page for authentication
+                WebViewHost.Navigate(new Uri(oAuthAuthorizeLink.Content.ToString()));
+
             }
         }
 
@@ -109,6 +157,8 @@ namespace LinkedinDemo
             string nonce = oAuthUtil.GetNonce();
             string timeStamp = oAuthUtil.GetTimeStamp();
 
+            
+
             string sigBaseStringParams = "oauth_consumer_key=" + consumerKey.Text;
             sigBaseStringParams += "&" + "oauth_nonce=" + nonce;
             sigBaseStringParams += "&" + "oauth_signature_method=" + "HMAC-SHA1";
@@ -116,6 +166,7 @@ namespace LinkedinDemo
             sigBaseStringParams += "&" + "oauth_token=" + requestToken.Text;
             sigBaseStringParams += "&" + "oauth_verifier=" + oAuthVerifier.Text;
             sigBaseStringParams += "&" + "oauth_version=1.0";
+            
             string sigBaseString = "POST&";
             sigBaseString += Uri.EscapeDataString(_linkedInAccessTokenUrl) + "&" + Uri.EscapeDataString(sigBaseStringParams);
 
@@ -225,6 +276,52 @@ namespace LinkedinDemo
         private void requestJobsByKeyWords_Click(object sender, RoutedEventArgs e)
         {
             requestLinkedInApi(_requestJobsByKeyWordsUrl);
+        }
+
+        private void WebViewHost_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            string x = args.Uri.ToString();
+
+
+
+        }
+
+        private void WebViewHost_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            string x = args.Uri.ToString();
+
+            if (args.Uri.ToString().Contains("sucess.htm"))
+            {
+                args.Cancel = true;
+
+                string queryParams = args.Uri.Query;
+                if (queryParams.Length > 0)
+                {
+                    try
+                    {
+                        //Store the Token and Token Secret
+                        QueryString qs = new QueryString(queryParams);
+
+                        //if (qs["oauth_token"] != null)
+                        //{
+                        //    string _token = qs["oauth_token"];
+                        //}
+                        if (qs["oauth_verifier"] != null)
+                        {
+                            this.oAuthVerifier.Text = qs["oauth_verifier"];
+                        }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        throw;
+                    }
+                }
+
+                
+            }
         }
 
     }
