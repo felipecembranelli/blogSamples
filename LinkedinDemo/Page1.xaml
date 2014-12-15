@@ -16,12 +16,19 @@
                          ScrollViewer.HorizontalScrollMode="Enabled"
                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                         ScrollViewer.ZoomMode="Enabled" NavigationCompleted="WebViewHost_NavigationCompleted" NavigationStarting="WebViewHost_NavigationStarting"
+                         ScrollViewer.ZoomMode="Enabled" NavigationStarting="WebViewHost_NavigationStarting"
                          />
         <StackPanel>
         <Button Content="Get Profile"  Name="btnGetProfile" HorizontalAlignment="Left" Margin="43,24,0,0" VerticalAlignment="Top" 
                 Click="btnGetProfile_Click"/>
 
+            <Button Content="Get Positions"  Name="btnGetPositions" HorizontalAlignment="Left" Margin="43,24,0,0" VerticalAlignment="Top" 
+                Click="btnGetPositions_Click"/>
+
+            <Button Content="Get Jobs"  Name="btnGetJobs" HorizontalAlignment="Left" Margin="43,24,0,0" VerticalAlignment="Top" 
+                Click="btnGetJobs_Click"/>
+
+            
             <TextBlock Name="txtLinkedInResponse" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Stretch"

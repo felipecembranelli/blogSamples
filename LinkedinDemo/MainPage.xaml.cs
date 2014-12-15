@@ -37,6 +37,9 @@ namespace LinkedinDemo
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
+            // This is a static public property that allows downstream pages to get a handle to the MainPage instance
+            // in order to call methods that are in this class.
+            Current = this;
         }
 
         /// <summary>

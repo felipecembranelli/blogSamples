@@ -25,7 +25,7 @@ namespace LinkedinDemo
     /// </summary>
     public sealed partial class Page1 : Page
     {
-        public static MainPage Current;
+        MainPage rootPage = MainPage.Current;
 
         string _consumerKey = "772jmojzy2vnra";
         string _consumerSecretKey = "hQu5DFEqP5JQyPGr";
@@ -62,17 +62,18 @@ namespace LinkedinDemo
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            
-            LinkedinAuthentication();
+
+            StartProcess();
         }
 
-        private async void LinkedinAuthentication()
+        private async void StartProcess()
         {
+            rootPage.NotifyUser("Start authentication:", NotifyType.StatusMessage);
+
             // Step 1 : Get request token
             await GetRequestToken();
 
-
-            //
+            rootPage.NotifyUser("End authentication:", NotifyType.StatusMessage);
         }
 
         public string UrlEncode(string value)
@@ -95,10 +96,10 @@ namespace LinkedinDemo
             return result.ToString();
         }
 
-        private async void getRequestToken_Click_1(object sender, RoutedEventArgs e)
-        {
-            await GetRequestToken();
-        }
+        //private async void getRequestToken_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    await GetRequestToken();
+        //}
 
         private async System.Threading.Tasks.Task GetRequestToken()
         {
@@ -145,7 +146,7 @@ namespace LinkedinDemo
                 }
 
                 _requestToken = oauth_token;
-                //requestTokenSecretKey.Text = oauth_token_secret;
+                _requestTokenSecretKey = oauth_token_secret;
                 _oAuthAuthorizeLink = Uri.UnescapeDataString(oauth_authorize_url + "?oauth_token=" + oauth_token);
 
                 //// Step 2 : Call linkedin web page for authentication
@@ -154,17 +155,15 @@ namespace LinkedinDemo
             }
         }
 
-        private async void getAccessToken_Click_1(object sender, RoutedEventArgs e)
-        {
-            await GetAccessToken();
-        }
+        //private async void getAccessToken_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    await GetAccessToken();
+        //}
 
         private async System.Threading.Tasks.Task GetAccessToken()
         {
             string nonce = oAuthUtil.GetNonce();
             string timeStamp = oAuthUtil.GetTimeStamp();
-
-
 
             string sigBaseStringParams = "oauth_consumer_key=" + _consumerKey;
             sigBaseStringParams += "&" + "oauth_nonce=" + nonce;
@@ -202,33 +201,30 @@ namespace LinkedinDemo
                     }
                 }
 
-                //accessToken.Text = oauth_token;
-                //accessTokenSecretKey.Text = oauth_token_secret;
+                _accessToken= oauth_token;
+                _accessTokenSecretKey = oauth_token_secret;
 
-                Current.NotifyUser("accessToken:" + oauth_token, NotifyType.StatusMessage);
+                if (oauth_token==null)
+                    rootPage.NotifyUser("Error getting accessToken", NotifyType.ErrorMessage);
+                else
+                    rootPage.NotifyUser("accessToken:" + oauth_token, NotifyType.StatusMessage);
             }
         }
 
-        //private void oAuthAuthorizeLink_Click_1(object sender, RoutedEventArgs e)
+        //private void requestUserProfile_Click_1(object sender, RoutedEventArgs e)
         //{
-        //    WebViewHost.Visibility = Windows.UI.Xaml.Visibility.Visible;
-        //    WebViewHost.Navigate(new Uri(oAuthAuthorizeLink.Content.ToString()));
+        //    requestLinkedInApi(_requestPeopleUrl);
         //}
 
-        private async void requestUserProfile_Click_1(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestPeopleUrl);
-        }
+        //private void requestConnections_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestConnectionsUrl);
+        //}
 
-        private void requestConnections_Click_1(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestConnectionsUrl);
-        }
-
-        private void requestPositions_Click_1(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestPositionsUrl);
-        }
+        //private void requestPositions_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestPositionsUrl);
+        //}
 
         private async void requestLinkedInApi(string url)
         {
@@ -268,8 +264,8 @@ namespace LinkedinDemo
                 var response = await httpClient.SendAsync(requestMsg);
                 var text = await response.Content.ReadAsStringAsync();
                 WebViewHost.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                //this.txtLinkedInResponse.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                //this.txtLinkedInResponse.Text = text;
+                this.txtLinkedInResponse.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                this.txtLinkedInResponse.Text = text;
             }
             catch (Exception Err)
             {
@@ -277,23 +273,23 @@ namespace LinkedinDemo
             }
         }
 
-        private void requestJobs_Click_1(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestJobsUrl);
-        }
+        //private void requestJobs_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestJobsUrl);
+        //}
 
-        private void requestJobsByKeyWords_Click(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestJobsByKeyWordsUrl);
-        }
+        //private void requestJobsByKeyWords_Click(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestJobsByKeyWordsUrl);
+        //}
 
-        private void WebViewHost_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            string x = args.Uri.ToString();
+        //private void WebViewHost_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        //{
+        //    string x = args.Uri.ToString();
 
 
 
-        }
+        //}
 
         private void WebViewHost_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
@@ -343,7 +339,19 @@ namespace LinkedinDemo
 
         private void btnGetProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            requestLinkedInApi(_requestPeopleUrl);
         }
+
+        private void btnGetPositions_Click(object sender, RoutedEventArgs e)
+        {
+            requestLinkedInApi(_requestPositionsUrl);
+        }
+
+        private void btnGetJobs_Click(object sender, RoutedEventArgs e)
+        {
+            requestLinkedInApi(_requestJobsUrl);
+        }
+
+
     }
 }
