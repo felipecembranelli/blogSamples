@@ -154,10 +154,15 @@ namespace LinkedinDemo
 
         private async void getAccessToken_Click_1(object sender, RoutedEventArgs e)
         {
+            await GetAccessToken();
+        }
+
+        private async System.Threading.Tasks.Task GetAccessToken()
+        {
             string nonce = oAuthUtil.GetNonce();
             string timeStamp = oAuthUtil.GetTimeStamp();
 
-            
+
 
             string sigBaseStringParams = "oauth_consumer_key=" + consumerKey.Text;
             sigBaseStringParams += "&" + "oauth_nonce=" + nonce;
@@ -166,7 +171,7 @@ namespace LinkedinDemo
             sigBaseStringParams += "&" + "oauth_token=" + requestToken.Text;
             sigBaseStringParams += "&" + "oauth_verifier=" + oAuthVerifier.Text;
             sigBaseStringParams += "&" + "oauth_version=1.0";
-            
+
             string sigBaseString = "POST&";
             sigBaseString += Uri.EscapeDataString(_linkedInAccessTokenUrl) + "&" + Uri.EscapeDataString(sigBaseStringParams);
 
@@ -311,6 +316,7 @@ namespace LinkedinDemo
                             this.oAuthVerifier.Text = qs["oauth_verifier"];
                         }
 
+                        GetAccessToken();
 
                     }
                     catch (Exception ex)

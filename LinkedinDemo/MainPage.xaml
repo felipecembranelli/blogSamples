@@ -16,6 +16,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
             <WebView x:Name="WebViewHost" Grid.Row="0"
                            Height="500"
                          Width="300"
@@ -26,8 +27,9 @@
                          ScrollViewer.ZoomMode="Enabled" NavigationCompleted="WebViewHost_NavigationCompleted" NavigationStarting="WebViewHost_NavigationStarting"
                          />
             <TextBox x:Name="LinkedInResponse" HorizontalAlignment="Stretch" Height="400" VerticalAlignment="Stretch" Visibility="Visible" IsReadOnly="True" TextWrapping="Wrap"/>
+            </StackPanel>
 
-            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,0,0,230" Grid.RowSpan="2" >
+            <StackPanel Visibility="Collapsed" Orientation="Vertical" Grid.Row="1" Margin="0,0,0,230" Grid.RowSpan="2" >
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="56" Text="OAuthLinkedIn" Margin="0,0,0,0"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Consumer Key" VerticalAlignment="Top" FontFamily="Segoe UI Semibold" FontSize="14.667"/>
 
