@@ -66,6 +66,8 @@ namespace LinkedinDemo
             StartProcess();
         }
 
+        #region Methods
+
         private async void StartProcess()
         {
             rootPage.NotifyUser("Start authentication:", NotifyType.StatusMessage);
@@ -95,11 +97,6 @@ namespace LinkedinDemo
 
             return result.ToString();
         }
-
-        //private async void getRequestToken_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    await GetRequestToken();
-        //}
 
         private async System.Threading.Tasks.Task GetRequestToken()
         {
@@ -155,11 +152,6 @@ namespace LinkedinDemo
             }
         }
 
-        //private async void getAccessToken_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    await GetAccessToken();
-        //}
-
         private async System.Threading.Tasks.Task GetAccessToken()
         {
             string nonce = oAuthUtil.GetNonce();
@@ -211,21 +203,6 @@ namespace LinkedinDemo
             }
         }
 
-        //private void requestUserProfile_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestPeopleUrl);
-        //}
-
-        //private void requestConnections_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestConnectionsUrl);
-        //}
-
-        //private void requestPositions_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestPositionsUrl);
-        //}
-
         private async void requestLinkedInApi(string url)
         {
             string nonce = oAuthUtil.GetNonce();
@@ -273,23 +250,24 @@ namespace LinkedinDemo
             }
         }
 
-        //private void requestJobs_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestJobsUrl);
-        //}
+        #endregion
 
-        //private void requestJobsByKeyWords_Click(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestJobsByKeyWordsUrl);
-        //}
+        #region Events
 
-        //private void WebViewHost_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        //{
-        //    string x = args.Uri.ToString();
+        private void btnGetProfile_Click(object sender, RoutedEventArgs e)
+        {
+            requestLinkedInApi(_requestPeopleUrl);
+        }
 
+        private void btnGetPositions_Click(object sender, RoutedEventArgs e)
+        {
+            requestLinkedInApi(_requestPositionsUrl);
+        }
 
-
-        //}
+        private void btnGetJobs_Click(object sender, RoutedEventArgs e)
+        {
+            requestLinkedInApi(_requestJobsUrl);
+        }
 
         private void WebViewHost_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
@@ -323,7 +301,7 @@ namespace LinkedinDemo
 
                         this.txtLinkedInResponse.Text = this._oAuthVerifier;
                         this.WebViewHost.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                        
+
 
                     }
                     catch (Exception ex)
@@ -337,21 +315,53 @@ namespace LinkedinDemo
             }
         }
 
-        private void btnGetProfile_Click(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestPeopleUrl);
-        }
+        #endregion
 
-        private void btnGetPositions_Click(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestPositionsUrl);
-        }
+        #region backup
 
-        private void btnGetJobs_Click(object sender, RoutedEventArgs e)
-        {
-            requestLinkedInApi(_requestJobsUrl);
-        }
+        //private async void getRequestToken_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    await GetRequestToken();
+        //}
+
+        //private void requestJobs_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestJobsUrl);
+        //}
+
+        //private void requestJobsByKeyWords_Click(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestJobsByKeyWordsUrl);
+        //}
+
+        //private void WebViewHost_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        //{
+        //    string x = args.Uri.ToString();
 
 
+
+        //}
+
+        //private void requestUserProfile_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestPeopleUrl);
+        //}
+
+        //private void requestConnections_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestConnectionsUrl);
+        //}
+
+        //private void requestPositions_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    requestLinkedInApi(_requestPositionsUrl);
+        //}
+
+        //private async void getAccessToken_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    await GetAccessToken();
+        //}
+
+        #endregion
     }
 }
