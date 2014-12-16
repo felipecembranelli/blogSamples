@@ -20,13 +20,13 @@
                          />
         <StackPanel>
         <Button Content="Get Profile"  Name="btnGetProfile" HorizontalAlignment="Left" Margin="43,24,0,0" VerticalAlignment="Top" 
-                Click="btnGetProfile_Click"/>
+                Click="btnGetProfile_Click" Visibility="Collapsed"/>
 
             <Button Content="Get Positions"  Name="btnGetPositions" HorizontalAlignment="Left" Margin="43,24,0,0" VerticalAlignment="Top" 
-                Click="btnGetPositions_Click"/>
+                Click="btnGetPositions_Click" Visibility="Collapsed"/>
 
             <Button Content="Get Jobs"  Name="btnGetJobs" HorizontalAlignment="Left" Margin="43,24,0,0" VerticalAlignment="Top" 
-                Click="btnGetJobs_Click"/>
+                Click="btnGetJobs_Click" Visibility="Collapsed"/>
 
             
             <TextBlock Name="txtLinkedInResponse" 

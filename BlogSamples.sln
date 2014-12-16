@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumingWCF", "ConsumingWC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedinDemo", "LinkedinDemo\LinkedinDemo.csproj", "{95343450-C8EA-442D-9EB4-7840307A77BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatusBarSample", "StatusBarSample\StatusBarSample.csproj", "{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,24 @@ Global
 		{95343450-C8EA-442D-9EB4-7840307A77BA}.Release|x86.ActiveCfg = Release|x86
 		{95343450-C8EA-442D-9EB4-7840307A77BA}.Release|x86.Build.0 = Release|x86
 		{95343450-C8EA-442D-9EB4-7840307A77BA}.Release|x86.Deploy.0 = Release|x86
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|ARM.ActiveCfg = Debug|ARM
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|ARM.Build.0 = Debug|ARM
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|ARM.Deploy.0 = Debug|ARM
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|x86.ActiveCfg = Debug|x86
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|x86.Build.0 = Debug|x86
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Debug|x86.Deploy.0 = Debug|x86
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|ARM.ActiveCfg = Release|ARM
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|ARM.Build.0 = Release|ARM
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|ARM.Deploy.0 = Release|ARM
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|x86.ActiveCfg = Release|x86
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|x86.Build.0 = Release|x86
+		{EF3D8DAC-FB8E-4A74-9CE2-8F104B226F15}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

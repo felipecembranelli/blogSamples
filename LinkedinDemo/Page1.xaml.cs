@@ -55,6 +55,8 @@ namespace LinkedinDemo
             this.InitializeComponent();
         }
 
+        #region WP Events
+
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -66,16 +68,17 @@ namespace LinkedinDemo
             StartProcess();
         }
 
+        #endregion
+
         #region Methods
 
         private async void StartProcess()
         {
-            rootPage.NotifyUser("Start authentication:", NotifyType.StatusMessage);
+            rootPage.NotifyUser("Start authentication...", NotifyType.StatusMessage);
 
             // Step 1 : Get request token
             await GetRequestToken();
 
-            rootPage.NotifyUser("End authentication:", NotifyType.StatusMessage);
         }
 
         public string UrlEncode(string value)
@@ -145,6 +148,11 @@ namespace LinkedinDemo
                 _requestToken = oauth_token;
                 _requestTokenSecretKey = oauth_token_secret;
                 _oAuthAuthorizeLink = Uri.UnescapeDataString(oauth_authorize_url + "?oauth_token=" + oauth_token);
+
+                if (oauth_token == null)
+                    rootPage.NotifyUser("Error getting requestToken", NotifyType.ErrorMessage);
+                else
+                    rootPage.NotifyUser("RequesToken:" + oauth_token, NotifyType.StatusMessage);
 
                 //// Step 2 : Call linkedin web page for authentication
                 WebViewHost.Navigate(new Uri(_oAuthAuthorizeLink));
@@ -273,8 +281,6 @@ namespace LinkedinDemo
         {
             string x = args.Uri.ToString();
 
-            //Current.NotifyUser("Usuário autenticado", NotifyType.StatusMessage);
-
             if (args.Uri.ToString().Contains("sucess.htm"))
             {
                 args.Cancel = true;
@@ -288,10 +294,6 @@ namespace LinkedinDemo
                         //Store the Token and Token Secret
                         QueryString qs = new QueryString(queryParams);
 
-                        //if (qs["oauth_token"] != null)
-                        //{
-                        //    string _token = qs["oauth_token"];
-                        //}
                         if (qs["oauth_verifier"] != null)
                         {
                             this._oAuthVerifier = qs["oauth_verifier"];
@@ -301,7 +303,10 @@ namespace LinkedinDemo
 
                         this.txtLinkedInResponse.Text = this._oAuthVerifier;
                         this.WebViewHost.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-
+                        this.btnGetJobs.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        this.btnGetPositions.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        this.btnGetProfile.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                        this.txtLinkedInResponse.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
                     }
                     catch (Exception ex)
@@ -317,51 +322,5 @@ namespace LinkedinDemo
 
         #endregion
 
-        #region backup
-
-        //private async void getRequestToken_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    await GetRequestToken();
-        //}
-
-        //private void requestJobs_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestJobsUrl);
-        //}
-
-        //private void requestJobsByKeyWords_Click(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestJobsByKeyWordsUrl);
-        //}
-
-        //private void WebViewHost_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        //{
-        //    string x = args.Uri.ToString();
-
-
-
-        //}
-
-        //private void requestUserProfile_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestPeopleUrl);
-        //}
-
-        //private void requestConnections_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestConnectionsUrl);
-        //}
-
-        //private void requestPositions_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    requestLinkedInApi(_requestPositionsUrl);
-        //}
-
-        //private async void getAccessToken_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    await GetAccessToken();
-        //}
-
-        #endregion
     }
 }
