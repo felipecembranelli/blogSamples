@@ -1,0 +1,24 @@
+{
+  "facets": {"_total": 0},
+  "jobs": {
+    "_total": 10,
+    "values": [
+      {
+        "company": {
+          "id": 1288,
+          "name": "Yahoo!"
+        },
+        "descriptionSnippet": "Senior Specialist, Display Supply Ops &amp; ManagementThe Supply/Partner Ops team is directly responsible for general acquisition and operation of 3P Supply. The team is responsible for identifying and sourcing the inventory that helps fuel the Yahoo Audience proposition in Brazil. The team is also responsible to bring and manage the large majority of our search supply and to bring video supply to",
+        "id": 19148244,
+        "jobPoster": {
+          "firstName": "Emily",
+          "headline": "Talent Aquisition Program Specialist at Yahoo",
+          "id": "fv3jf4cuhB",
+          "lastName": "C."
+        },
+        "locationDescription": "Brazil-Sao Paulo-Sao Paulo"
+      }
+	]
+  },
+  "numResults": 10
+}
