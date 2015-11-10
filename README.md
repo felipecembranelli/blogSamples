@@ -1,7 +1,9 @@
-# blogSamples
+# My Blog Samples
 
 
-Sample Windows Phone application showing several platform resources
+Sample Windows Phone application showing several platform resources. 
+
+Visit my blog: http://felipecembranelli.blogspot.com.br
 
 
 ## Contributing
